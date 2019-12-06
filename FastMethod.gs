@@ -1,7 +1,7 @@
 function transferToCalendar() {
-  var sheet = SpreadsheetApp.openById("14j0U6OuX63iu2KjZC9IJXL5QpCeQSqG9G5pxE1zM2Qo");
+  var sheet = SpreadsheetApp.openById("вставить ID");
   var list1 = sheet.getSheetByName("База клиентов");
-  var calendar = CalendarApp.getCalendarById('70nhdlr1snpb2na5tfetdd3cdc@group.calendar.google.com');
+  var calendar = CalendarApp.getCalendarById("вставить ID");
      
   //дата сегодня
   var today = new Date();
