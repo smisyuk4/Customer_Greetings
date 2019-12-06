@@ -27,7 +27,7 @@ function copyActiveRow(){
 }
 
 function copyLastRow() {
-  var sheet = SpreadsheetApp.openById("14j0U6OuX63iu2KjZC9IJXL5QpCeQSqG9G5pxE1zM2Qo");
+  var sheet = SpreadsheetApp.openById("вставить ID");
   var list1 = sheet.getSheetByName("База клиентов"); 
   var list3 = sheet.getSheetByName("База клиентов (Sorted)");   
   
