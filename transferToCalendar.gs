@@ -63,7 +63,7 @@ function transferToCalendar() {
 function pushEvents(eventsArray, calendar, list1, r, c){    
   //правило повторения события (ежегодно)
     var recurrence = CalendarApp.newRecurrence().addYearlyRule();  
-    var dayOfWeek = /Sun|Mon|Tue|Wed|Thur|Fri|Sat/;
+    var dayOfWeek = /Sun|Mon|Tue|Wed|Thu|Fri|Sat/;
   
   //отправка массива данных в календарь
   for (var i=0; i<eventsArray.length; i++){
