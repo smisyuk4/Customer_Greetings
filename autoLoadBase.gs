@@ -15,23 +15,23 @@ function autoLoadBase() {
    Logger.log(row);
   
   //запустить копирование по 1 строке
-  for (var i=0; i<10; i++){    
+  for (var i=0; i<20; i++){    
     if (!list1.getRange(row+i, 12).isChecked()){ //нет флажка    
      Logger.log("НЕТ флажка - копирую данные");    
     
-    //проверка на наличие даты
+    //проверка на наличие даты и имени
     var dateCell = list1.getRange(row+i, 3).getValue();
     var dateString = dateCell.toString();      
     var title = list1.getRange(row+i, 2).getValue();    
     
-     if (dateString.match(dayOfWeek) != null){      
+     if ((dateString.match(dayOfWeek) != null)&&(title != "")){      
        Logger.log("дата есть! - отправить данные!");
        calendar.createAllDayEventSeries(title, dateCell, recurrence); //загрузить данные в календарь      
        list1.getRange(row+i, 12).check(); //поставить флажок 
        
-     } else if (dateString.match(dayOfWeek) == null){         
+     } else if ((dateString.match(dayOfWeek) == null)||(title == "")){         
       Logger.log("Не верные данные в ячейке с датой. Событие не перенесено");      
-      list1.getRange(row+i, 3).setBackground("#ff8c8c"); //покрасить ячейку если там нет даты  
+      list1.getRange(row+i, 2, 1, 2).setBackground("#ff8c8c"); //покрасить ячейки если там нет даты или имени  
       list1.getRange(row+i, 12).check(); //поставить флажок 
      }         
   } else {
