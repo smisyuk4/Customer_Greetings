@@ -1,7 +1,7 @@
 function manualTransferData() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet();
   var list1 = sheet.getActiveSheet(); 
-  var calendar = CalendarApp.getCalendarById('70nhdlr1snpb2na5tfetdd3cdc@group.calendar.google.com');
+  var calendar = CalendarApp.getCalendarById('Свой ID');
   
   //правило повторения события (ежегодно)
   var recurrence = CalendarApp.newRecurrence().addYearlyRule();  
