@@ -1,7 +1,7 @@
 function autoLoadBase() {
-  var sheet = SpreadsheetApp.openById("свой ID");
+  var sheet = SpreadsheetApp.openById("14j0U6OuX63iu2KjZC9IJXL5QpCeQSqG9G5pxE1zM2Qo");
   var list1 = sheet.getSheetByName("База клиентов");
-  var calendar = CalendarApp.getCalendarById('свой ID');  
+  var calendar = CalendarApp.getCalendarById('70nhdlr1snpb2na5tfetdd3cdc@group.calendar.google.com');  
   
   //правило повторения события (ежегодно)
   var recurrence = CalendarApp.newRecurrence().addYearlyRule();  
@@ -29,10 +29,11 @@ function autoLoadBase() {
        calendar.createAllDayEventSeries(title, dateCell, recurrence); //загрузить данные в календарь      
        list1.getRange(row+i, 12).check(); //поставить флажок 
        
-    } else if (dateString.match(dayOfWeek) == null){         
+     } else if (dateString.match(dayOfWeek) == null){         
       Logger.log("Не верные данные в ячейке с датой. Событие не перенесено");      
-      list1.getRange(row+i, 3).setBackground("#ff8c8c"); //покрасить ячейку если там нет даты     
-    }         
+      list1.getRange(row+i, 3).setBackground("#ff8c8c"); //покрасить ячейку если там нет даты  
+      list1.getRange(row+i, 12).check(); //поставить флажок 
+     }         
   } else {
      Logger.log("Есть флажок - проверяю дальше боксы");    
   }  
