@@ -4,6 +4,7 @@ function main(){
   getClientsFromCalendar();
   pullGreeting();
   sendText(greetingRandomize, clientString);  
+  report(sheet, clientString, today);
 }
 
 function getClientsFromCalendar() {
@@ -11,7 +12,7 @@ function getClientsFromCalendar() {
    var calendar = CalendarApp.getCalendarById('свой ID');
      
   //дата сегодня
-  var today = new Date();
+   today = new Date();
   
   //массив событий из календаря
   var clientArr = calendar.getEventsForDay(today);
@@ -28,7 +29,7 @@ function getClientsFromCalendar() {
 }
 
 function pullGreeting(){
-  var sheet = SpreadsheetApp.openById("свой ID");  
+  sheet = SpreadsheetApp.openById("свой ID");  
   var list2 = sheet.getSheetByName("Поздравления Telegram");
   
   //перемешивает строки в диапазоне и берет значение первой
