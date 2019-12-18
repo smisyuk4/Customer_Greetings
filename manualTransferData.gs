@@ -24,16 +24,16 @@ function manualTransferData() {
         
     
      if ((dateString.match(dayOfWeek) != null)&&(title != "")){
-       //корректировка даты из-за ошибки создания события раньше 1991года
-      var yearCell = dateCell.getFullYear();       
-     Logger.log(yearCell);  
-    
-     if (yearCell <= 1991){
-        var currentDate = new Date(dateCell);
-       currentDate.setDate(currentDate.getDate() + 1);    
-     } else {
-       currentDate = dateCell;
-     }    
+       //корректировка даты из-за ошибки часов         
+       var cellTime = dateCell.getHours(); //23 (плохо) или 00 (хорошо)
+       Logger.log(cellTime);
+   
+       if (cellTime == 23){
+         var currentDate = new Date(dateCell);
+         currentDate.setDate(currentDate.getDate());    
+       } else {
+         currentDate = dateCell;
+       }    
        Logger.log(currentDate);        
        
       //загрузить данные в календарь
