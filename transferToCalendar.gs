@@ -79,17 +79,17 @@ function pushEvents(eventsArray, calendar, list1, r, c){
     Logger.log(title)    
     
     if ((dateString.match(dayOfWeek) != null)&&(title != "")){
-      //корректировка даты из-за ошибки создания события раньше 1991года
-     var yearCell = dateCell.getFullYear();       
-       Logger.log(yearCell);       
-      
-      if (yearCell <= 1991){
-        var currentDate = new Date(dateCell);
-        currentDate.setDate(currentDate.getDate() + 1);    
-      } else {
-        currentDate = dateCell;
-      }    
-      Logger.log(currentDate);        
+      //корректировка даты из-за ошибки часов         
+       var cellTime = dateCell.getHours(); //23 (плохо) или 00 (хорошо)
+       Logger.log(cellTime);
+   
+       if (cellTime == 23){
+         var currentDate = new Date(dateCell);
+         currentDate.setDate(currentDate.getDate());    
+       } else {
+         currentDate = dateCell;
+       }    
+       Logger.log(currentDate);        
       var event = calendar.createAllDayEventSeries(eventsArray[i][0], currentDate, recurrence);
     } else if ((dateString.match(dayOfWeek) == null)||(eventsArray[i][0] != "")||(eventsArray[i][1] != "")){         
       Logger.log("Не верные данные в ячейках имени или даты. Событие не перенесено");
