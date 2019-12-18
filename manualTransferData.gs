@@ -19,14 +19,25 @@ function manualTransferData() {
   
    //проверка на наличие даты и имени
     var dateCell = list1.getRange(activeRow, 3).getValue();
-    var dateString = dateCell.toString();  
-    
+    var dateString = dateCell.toString();      
     var title = list1.getRange(activeRow, 2).getValue();    
+    
+    
+    var yearCell = dateCell.getFullYear();       
+     Logger.log(yearCell);   
+    //корректировка даты из-за ошибки создания события раньше 1991года         
+    if (yearCell <= 1991){
+      var currentDate = new Date(dateCell);
+      currentDate.setDate(currentDate.getDate() + 1);    
+    } else {
+      currentDate = dateCell;
+     }    
+       Logger.log(currentDate);      
     
      if ((dateString.match(dayOfWeek) != null)&&(title != "")){
       //загрузить данные в календарь
        Logger.log("дата есть! - отправить данные!");
-       calendar.createAllDayEventSeries(title, dateCell, recurrence);
+       calendar.createAllDayEventSeries(title, currentDate, recurrence);
     } else if ((dateString.match(dayOfWeek) == null)|| (title == "")){         
       Logger.log("Не верные данные в ячейке с датой и имени. Событие не перенесено");
       //покрасить ячейки
