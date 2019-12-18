@@ -25,20 +25,19 @@ function autoLoadBase() {
     var title = list1.getRange(row+i, 2).getValue();      
     
      if ((dateString.match(dayOfWeek) != null)&&(title != "")){    
-       //корректировка даты из-за ошибки создания события раньше 1991года
-      var yearCell = dateCell.getFullYear();       
-      Logger.log(yearCell);  
-    
-     if (yearCell <= 1991){
-       var currentDate = new Date(dateCell);
-        currentDate.setDate(currentDate.getDate() + 1);    
-      } else {
-       currentDate = dateCell;
-     }    
-      Logger.log(currentDate);  
+       //корректировка даты из-за ошибки часов         
+       var cellTime = dateCell.getHours(); //23 (плохо) или 00 (хорошо)
+       Logger.log(cellTime);
+   
+       if (cellTime == 23){
+         var currentDate = new Date(dateCell);
+         currentDate.setDate(currentDate.getDate());    
+       } else {
+         currentDate = dateCell;
+       }    
+       Logger.log(currentDate);
        
-       Logger.log("дата есть! - отправить данные!");
-       calendar.createAllDayEventSeries(title, dateCell, recurrence); //загрузить данные в календарь      
+       calendar.createAllDayEventSeries(title, currentDate, recurrence); //загрузить данные в календарь      
        list1.getRange(row+i, 12).check(); //поставить флажок 
        
      } else if ((dateString.match(dayOfWeek) == null)||(title == "")){         
