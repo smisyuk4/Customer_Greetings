@@ -22,21 +22,21 @@ function autoLoadBase() {
     //проверка на наличие даты и имени
     var dateCell = list1.getRange(row+i, 3).getValue();
     var dateString = dateCell.toString();      
-    var title = list1.getRange(row+i, 2).getValue();    
-      
-    //корректировка даты из-за ошибки создания события раньше 1991года
-    var yearCell = dateCell.getFullYear();       
-    Logger.log(yearCell);  
+    var title = list1.getRange(row+i, 2).getValue();      
     
-    if (yearCell <= 1991){
-      var currentDate = new Date(dateCell);
-      currentDate.setDate(currentDate.getDate() + 1);    
-    } else {
-      currentDate = dateCell;
-    }    
-     Logger.log(currentDate);  
+     if ((dateString.match(dayOfWeek) != null)&&(title != "")){    
+       //корректировка даты из-за ошибки создания события раньше 1991года
+      var yearCell = dateCell.getFullYear();       
+      Logger.log(yearCell);  
     
-     if ((dateString.match(dayOfWeek) != null)&&(title != "")){      
+     if (yearCell <= 1991){
+       var currentDate = new Date(dateCell);
+        currentDate.setDate(currentDate.getDate() + 1);    
+      } else {
+       currentDate = dateCell;
+     }    
+      Logger.log(currentDate);  
+       
        Logger.log("дата есть! - отправить данные!");
        calendar.createAllDayEventSeries(title, dateCell, recurrence); //загрузить данные в календарь      
        list1.getRange(row+i, 12).check(); //поставить флажок 
