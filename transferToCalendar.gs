@@ -2,10 +2,10 @@
 //запускать через тригеры проэкта
 
 function transferToCalendar() {
-  var sheet = SpreadsheetApp.openById("Свой ID"); //+
-  var list1 = sheet.getSheetByName("База Клиентов"); //+
-  var calendar = CalendarApp.getCalendarById('Свой ID'); //+
-     
+  var sheet = SpreadsheetApp.openById("текст"); 
+  var list1 = sheet.getSheetByName("База Клиентов"); 
+  var calendar = CalendarApp.getCalendarById('текст'); 
+  
   //дата сегодня
   var today = new Date();
   
@@ -79,15 +79,15 @@ function pushEvents(eventsArray, calendar, list1, r, c){
     Logger.log(title)    
     
     if ((dateString.match(dayOfWeek) != null)&&(title != "")){
-      //корректировка даты из-за ошибки часов         
-       var cellTime = dateCell.getHours(); //23 (плохо) или 00 (хорошо)
-       Logger.log(cellTime);
-   
-       if (cellTime == 23){
-         var currentDate = new Date(dateCell);
-         currentDate.setDate(currentDate.getDate());    
-       } else {
+      //корректировка даты из-за ошибки часов
+       var cellTime = dateCell.getHours(); //23 (плохо) или 00 (хорошо) 
+       var currentDate;   
+    
+       if (cellTime == 0){ 
          currentDate = dateCell;
+       } else if (cellTime != 0){ 
+         currentDate = new Date(dateCell);
+         currentDate.setDate(currentDate.getDate()+1);     
        }    
        Logger.log(currentDate);        
       var event = calendar.createAllDayEventSeries(eventsArray[i][0], currentDate, recurrence);
