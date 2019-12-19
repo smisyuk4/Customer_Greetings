@@ -1,7 +1,7 @@
 function manualTransferData() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet();
-  var list1 = sheet.getActiveSheet(); 
-  var calendar = CalendarApp.getCalendarById('Свой ID');
+  var list1 = sheet.getActiveSheet();  
+  var calendar = CalendarApp.getCalendarById('текст'); 
   
   //правило повторения события (ежегодно)
   var recurrence = CalendarApp.newRecurrence().addYearlyRule();  
@@ -20,21 +20,20 @@ function manualTransferData() {
    //проверка на наличие даты и имени
     var dateCell = list1.getRange(activeRow, 3).getValue();
     var dateString = dateCell.toString();      
-    var title = list1.getRange(activeRow, 2).getValue();    
-        
+    var title = list1.getRange(activeRow, 2).getValue();       
     
-     if ((dateString.match(dayOfWeek) != null)&&(title != "")){
-       //корректировка даты из-за ошибки часов         
-       var cellTime = dateCell.getHours(); //23 (плохо) или 00 (хорошо)
-       Logger.log(cellTime);
-   
-       if (cellTime == 23){
-         var currentDate = new Date(dateCell);
-         currentDate.setDate(currentDate.getDate());    
-       } else {
+     if ((dateString.match(dayOfWeek) != null)&&(title != "")){       
+       //корректировка даты из-за ошибки часов
+       var cellTime = dateCell.getHours(); //23 (плохо) или 00 (хорошо) 
+       var currentDate;   
+    
+       if (cellTime == 0){ 
          currentDate = dateCell;
+       } else if (cellTime != 0){ 
+         currentDate = new Date(dateCell);
+         currentDate.setDate(currentDate.getDate()+1);     
        }    
-       Logger.log(currentDate);        
+       Logger.log(currentDate);             
        
       //загрузить данные в календарь
        Logger.log("дата есть! - отправить данные!");
